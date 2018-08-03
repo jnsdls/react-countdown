@@ -81,14 +81,26 @@ export default class Countdown extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { date, now, precision, controlled } = nextProps;
-    this.setDeltaState(
-      getTimeDifference(date, {
-        now,
-        precision,
-        controlled,
-      })
-    );
+    const { date, now, precision, controlled, restartOnDateChangeAfterComplete } = nextProps;
+
+    const timeDifference = getTimeDifference(date, {
+      now,
+      precision,
+      controlled,
+    });
+
+    // restartOnDateChangeAfterComplete implementation
+    if (
+      timeDifference.completed &&
+      date !== this.props.date &&
+      restartOnDateChangeAfterComplete &&
+      !this.interval
+    ) {
+      this.interval = setInterval(this.tick, this.props.intervalDelay);
+    }
+    // end restartOnDateChangeAfterComplete implementation
+
+    this.setDeltaState(timeDifference);
   }
 
   componentWillUnmount() {
@@ -191,6 +203,7 @@ Countdown.propTypes = {
   now: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
   onTick: PropTypes.func,
   onComplete: PropTypes.func,
+  restartOnDateChangeAfterComplete: PropTypes.bool,
 };
 
 Countdown.defaultProps = {
@@ -200,4 +213,5 @@ Countdown.defaultProps = {
   intervalDelay: 1000,
   precision: 0,
   children: null,
+  restartOnDateChangeAfterComplete: false,
 };

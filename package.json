@@ -54,6 +54,7 @@
     "react-test-renderer": "^16.2.0"
   },
   "jest": {
+    "testURL": "http://localhost/",
     "snapshotSerializers": [
       "<rootDir>/node_modules/enzyme-to-json/serializer"
     ]

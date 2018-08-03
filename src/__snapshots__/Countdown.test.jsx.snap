@@ -26,6 +26,7 @@ exports[`<Countdown /> compares snapshots and correct mounting of React children
   daysInHours={false}
   intervalDelay={1000}
   precision={0}
+  restartOnDateChangeAfterComplete={false}
   zeroPadLength={0}
 >
   <span>
@@ -47,6 +48,7 @@ exports[`<Countdown /> compares snapshots and correct mounting of React children
   daysInHours={false}
   intervalDelay={1000}
   precision={0}
+  restartOnDateChangeAfterComplete={false}
   zeroPadLength={0}
 >
   <Completionist
@@ -62,6 +64,7 @@ exports[`<Countdown /> compares snapshots and correct mounting of React children
         "milliseconds": 0,
         "minutes": 0,
         "precision": 0,
+        "restartOnDateChangeAfterComplete": false,
         "seconds": 0,
         "total": 0,
         "zeroPadLength": 0,
@@ -159,6 +162,7 @@ exports[`<Countdown /> should trigger onTick and onComplete callbacks 1`] = `
     }
   }
   precision={0}
+  restartOnDateChangeAfterComplete={false}
   zeroPadLength={2}
 >
   <span>
