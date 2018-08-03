@@ -3,7 +3,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { mount, shallow } from 'enzyme';
 
-import Countdown, { zeroPad, getTimeDifference } from './Countdown';
+import Countdown, { zeroPad, getTimeDifference, isValidDate } from './Countdown';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -286,5 +286,35 @@ describe('getTimeDifference', () => {
       milliseconds: 3,
       completed: false,
     });
+  });
+});
+
+describe('isValidDate', () => {
+  it('should accept a valid date object', () => {
+    expect(isValidDate(new Date())).toBe(true);
+  });
+
+  it('should accept a valid number', () => {
+    expect(isValidDate(1000)).toBe(true);
+  });
+
+  it('should accept a valid string', () => {
+    expect(isValidDate('Friday, August 3, 2018 9:35:58 PM')).toBe(true);
+  });
+
+  it('should not accept a random string', () => {
+    expect(isValidDate('foo')).toBe(false);
+  });
+
+  it('should not accept a random object', () => {
+    expect(isValidDate({})).toBe(false);
+  });
+
+  it('should not accept a random array', () => {
+    expect(isValidDate([])).toBe(false);
+  });
+
+  it('should not accept a random boolean', () => {
+    expect(isValidDate(true)).toBe(false);
   });
 });

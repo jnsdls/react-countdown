@@ -52,6 +52,15 @@ export const getTimeDifference = (
 };
 
 /**
+ * Cheks if the input is a valid (parseable) date
+ *
+ * @param {any} date
+ *
+ * @returns Boolean
+ */
+export const isValidDate = date => !Number.isNaN(Date.parse(date));
+
+/**
  * A customizable countdown component for React.
  *
  * @export
@@ -91,10 +100,10 @@ export default class Countdown extends React.Component {
 
     // restartOnDateChangeAfterComplete implementation
     if (
-      timeDifference.completed &&
-      date !== this.props.date &&
+      !timeDifference.completed &&
       restartOnDateChangeAfterComplete &&
-      !this.interval
+      !this.interval &&
+      isValidDate(date)
     ) {
       this.interval = setInterval(this.tick, this.props.intervalDelay);
     }

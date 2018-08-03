@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getTimeDifference = exports.zeroPad = undefined;
+exports.isValidDate = exports.getTimeDifference = exports.zeroPad = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -78,6 +78,17 @@ var getTimeDifference = exports.getTimeDifference = function getTimeDifference(d
 };
 
 /**
+ * Cheks if the input is a valid (parseable) date
+ *
+ * @param {any} date
+ *
+ * @returns Boolean
+ */
+var isValidDate = exports.isValidDate = function isValidDate(date) {
+  return !Number.isNaN(Date.parse(date));
+};
+
+/**
  * A customizable countdown component for React.
  *
  * @export
@@ -136,7 +147,7 @@ var Countdown = function (_React$Component) {
       });
 
       // restartOnDateChangeAfterComplete implementation
-      if (timeDifference.completed && date !== this.props.date && restartOnDateChangeAfterComplete && !this.interval) {
+      if (!timeDifference.completed && restartOnDateChangeAfterComplete && !this.interval && isValidDate(date)) {
         this.interval = setInterval(this.tick, this.props.intervalDelay);
       }
       // end restartOnDateChangeAfterComplete implementation
