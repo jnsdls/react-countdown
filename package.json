@@ -1,6 +1,6 @@
 {
   "name": "react-countdown-now",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A customizable countdown component for React.",
   "main": "dist/Countdown.js",
   "repository": {
